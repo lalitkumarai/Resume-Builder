@@ -22,6 +22,7 @@ import CoverLetterBuilder from './pages/CoverLetterBuilder';
 import CoverLetterTemplates from './pages/CoverLetterTemplates';
 import ResumeTemplateGuide from './pages/ResumeTemplateGuide';
 import CreateYourResume from './pages/CreateYourResume';
+import ChooseYourTemplate from './pages/ChooseYourTemplate';
 import Profile from './pages/Profile';
 import PrivateRoute from './components/Auth/PrivateRoute';
 
@@ -56,6 +57,7 @@ const App: React.FC = () => {
             <Route path="/cover-letter-builder" element={<PrivateRoute><CoverLetterBuilder /></PrivateRoute>} />
             <Route path="/resume-guide" element={<ResumeTemplateGuide />} />
             <Route path="/create-resume" element={<CreateYourResume />} />
+            <Route path="/choose-template" element={<ChooseYourTemplate />} />
 
                 {/* Protected Routes */}
                 <Route

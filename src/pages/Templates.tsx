@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { FaSearch, FaFilter, FaStar, FaCrown, FaEye, FaCheck, FaTimes } from 'react-icons/fa';
+import { FaSearch, FaFilter, FaStar, FaCrown, FaEye, FaCheck, FaTimes, FaLightbulb } from 'react-icons/fa';
 
 import { resumeTemplates, templateCategories } from '../data/templates';
 import { ResumeTemplate, TemplateCategory } from '../types/templates';
@@ -361,6 +361,25 @@ const Templates: React.FC<TemplatesProps> = () => {
           Select from our collection of professionally designed, ATS-friendly resume templates.
           Each template is crafted to help you stand out and land your dream job.
         </Subtitle>
+        <div style={{ marginTop: '2rem', textAlign: 'center' }}>
+          <Link
+            to="/choose-template"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.75rem',
+              background: '#667eea',
+              color: 'white',
+              padding: '1rem 2rem',
+              borderRadius: '12px',
+              textDecoration: 'none',
+              fontWeight: '600',
+              transition: 'all 0.3s ease'
+            }}
+          >
+            <FaLightbulb /> Detailed Template Selection Guide
+          </Link>
+        </div>
       </Header>
 
       <FilterSection>
