@@ -1,0 +1,66 @@
+{
+  "name": "resume-builder",
+  "version": "1.0.0",
+  "description": "A modern resume builder web application for students and professionals",
+  "main": "src/index.tsx",
+  "scripts": {
+    "start": "set NODE_OPTIONS=--openssl-legacy-provider && react-scripts start",
+    "build": "set NODE_OPTIONS=--openssl-legacy-provider && react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "server": "cd server && npm start",
+    "dev": "concurrently \"npm start\" \"npm run server\"",
+    "install-all": "npm install --legacy-peer-deps && cd server && npm install --legacy-peer-deps"
+  },
+  "keywords": [
+    "resume",
+    "builder",
+    "cv",
+    "career",
+    "job",
+    "application",
+    "ATS",
+    "professional"
+  ],
+  "author": "Resume Builder Team",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.4.0",
+    "date-fns": "^2.29.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.34.2",
+    "react-icons": "^4.8.0",
+    "react-router-dom": "^6.8.1",
+    "react-scripts": "4.0.3",
+    "react-toastify": "^8.2.0",
+    "styled-components": "^5.3.11",
+    "typescript": "^4.1.6",
+    "uuid": "^9.0.0",
+    "web-vitals": "^2.1.4"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.68",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18",
+    "@types/styled-components": "^5.1.26",
+    "@types/uuid": "^9.0.1",
+    "concurrently": "^7.6.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

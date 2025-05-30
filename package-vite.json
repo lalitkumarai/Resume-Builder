@@ -1,0 +1,49 @@
+{
+  "name": "resume-builder",
+  "version": "1.0.0",
+  "description": "A modern resume builder web application for students and professionals",
+  "main": "src/index.tsx",
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "server": "cd server && npm start",
+    "dev": "concurrently \"npm start\" \"npm run server\""
+  },
+  "keywords": [
+    "resume",
+    "builder",
+    "cv",
+    "career",
+    "job",
+    "application",
+    "ATS",
+    "professional"
+  ],
+  "author": "Resume Builder Team",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "axios": "^1.4.0",
+    "react-router-dom": "^6.8.1",
+    "react-hook-form": "^7.43.9",
+    "styled-components": "^5.3.11",
+    "react-icons": "^4.8.0",
+    "uuid": "^9.0.0",
+    "date-fns": "^2.29.3",
+    "react-toastify": "^9.1.1",
+    "framer-motion": "^10.12.16"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.0",
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "@types/uuid": "^9.0.1",
+    "@types/styled-components": "^5.1.26",
+    "@vitejs/plugin-react": "^3.1.0",
+    "typescript": "^4.9.5",
+    "vite": "^4.2.0",
+    "concurrently": "^7.6.0"
+  }
+}
