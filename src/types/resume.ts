@@ -3,12 +3,17 @@
 export interface PersonalInfo {
   id: string;
   fullName: string;
+  firstName: string;
+  lastName: string;
+  title?: string;
   email: string;
   phone: string;
   location: string;
   linkedIn?: string;
+  linkedin?: string; // Alternative spelling for compatibility
   github?: string;
   portfolio?: string;
+  website?: string; // Alternative for portfolio
   profileImage?: string;
 }
 
@@ -20,13 +25,16 @@ export interface ProfessionalSummary {
 export interface WorkExperience {
   id: string;
   jobTitle: string;
+  position: string; // Alternative for jobTitle
   companyName: string;
+  company: string; // Alternative for companyName
   location: string;
   startDate: string;
   endDate: string;
   isCurrentJob: boolean;
   responsibilities: string[];
   achievements: string[];
+  description: string; // Combined description
 }
 
 export interface Education {
@@ -42,7 +50,8 @@ export interface Education {
 export interface Skill {
   id: string;
   name: string;
-  category: 'technical' | 'soft' | 'language';
+  category: 'technical' | 'soft' | 'language' | 'Programming' | 'Frontend' | 'Backend' | 'Cloud' | 'DevOps';
+  level?: 'Beginner' | 'Intermediate' | 'Advanced' | 'Expert';
   proficiency?: 'beginner' | 'intermediate' | 'advanced' | 'expert';
 }
 
@@ -118,7 +127,9 @@ export interface Resume {
   title: string;
   personalInfo: PersonalInfo;
   professionalSummary: ProfessionalSummary;
+  summary?: string; // Alternative for professionalSummary.summary
   workExperience: WorkExperience[];
+  experience?: WorkExperience[]; // Alternative for workExperience
   education: Education[];
   skills: Skill[];
   projects: Project[];
@@ -132,6 +143,13 @@ export interface Resume {
   createdAt: string;
   updatedAt: string;
   isPublic: boolean;
+  analytics?: {
+    views: number;
+    downloads: number;
+  };
+  metadata?: {
+    completionPercentage: number;
+  };
 }
 
 export interface User {
@@ -140,6 +158,7 @@ export interface User {
   firstName: string;
   lastName: string;
   createdAt: string;
+  updatedAt?: string;
   resumes: string[]; // Array of resume IDs
 }
 

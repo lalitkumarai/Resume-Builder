@@ -207,6 +207,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         lastName: userData.lastName,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
+        resumes: [],
       };
 
       localStorage.setItem('token', token);

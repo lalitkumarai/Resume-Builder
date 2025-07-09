@@ -95,7 +95,7 @@ export class ATSOptimizer {
     };
 
     // Analyze keywords
-    const keywordScore = this.analyzeKeywords(resumeData, jobDescription, suggestions);
+    const keywordScore = this.analyzeKeywords(resumeData, suggestions, jobDescription);
     if (jobDescription) {
       keywordAnalysis = this.performKeywordAnalysis(resumeData, jobDescription);
     }
@@ -131,7 +131,7 @@ export class ATSOptimizer {
   }
 
   // Analyze keyword optimization
-  private static analyzeKeywords(resumeData: any, jobDescription?: JobDescription, suggestions: ATSSuggestion[]): number {
+  private static analyzeKeywords(resumeData: any, suggestions: ATSSuggestion[], jobDescription?: JobDescription): number {
     let score = 70; // Base score
 
     const resumeText = this.extractTextFromResume(resumeData).toLowerCase();

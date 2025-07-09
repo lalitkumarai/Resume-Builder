@@ -26,13 +26,22 @@ import { useAuth } from '../context/AuthContext';
 // Icons
 import { FaSave, FaDownload, FaEye, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
+// Styled component prop interfaces
+interface SidebarProps {
+  isOpen: boolean;
+}
+
+interface ActionButtonProps {
+  primary?: boolean;
+}
+
 const BuilderContainer = styled.div`
   display: flex;
   min-height: 100vh;
   background: #f8f9fa;
 `;
 
-const Sidebar = styled.div`
+const Sidebar = styled.div<SidebarProps>`
   width: 350px;
   background: white;
   border-right: 1px solid #e9ecef;
@@ -90,7 +99,7 @@ const ResumeTitle = styled.h1`
   margin: 0;
 `;
 
-const ActionButton = styled.button`
+const ActionButton = styled.button<ActionButtonProps>`
   display: flex;
   align-items: center;
   gap: 0.5rem;

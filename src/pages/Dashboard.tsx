@@ -44,7 +44,7 @@ const Title = styled.h1`
   margin: 0;
 `;
 
-const CreateButton = styled(Link)`
+const CreateButton = styled.button`
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -52,8 +52,9 @@ const CreateButton = styled(Link)`
   color: white;
   padding: 0.75rem 1.5rem;
   border-radius: 12px;
-  text-decoration: none;
+  border: none;
   font-weight: 600;
+  cursor: pointer;
   transition: all 0.3s ease;
 
   &:hover {

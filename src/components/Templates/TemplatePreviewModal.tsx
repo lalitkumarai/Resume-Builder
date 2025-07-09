@@ -216,63 +216,69 @@ const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
   const sampleResume: Resume = {
     id: 'sample',
     userId: 'sample',
-    templateId: template.id,
     title: 'Sample Resume',
     personalInfo: {
+      id: 'personal-1',
+      fullName: 'John Doe',
       firstName: 'John',
       lastName: 'Doe',
       email: 'john.doe@email.com',
       phone: '(555) 123-4567',
       location: 'New York, NY',
       title: 'Senior Software Engineer',
+      linkedIn: 'linkedin.com/in/johndoe',
       linkedin: 'linkedin.com/in/johndoe',
       website: 'johndoe.dev'
     },
-    summary: 'Experienced software engineer with 8+ years of expertise in full-stack development, cloud architecture, and team leadership. Proven track record of delivering scalable solutions and mentoring junior developers.',
-    experience: [
+    skills: [
+      { id: '1', name: 'JavaScript', level: 'Expert', category: 'technical' },
+      { id: '2', name: 'React', level: 'Expert', category: 'technical' },
+      { id: '3', name: 'Node.js', level: 'Advanced', category: 'technical' },
+      { id: '4', name: 'AWS', level: 'Advanced', category: 'technical' },
+      { id: '5', name: 'Docker', level: 'Intermediate', category: 'technical' },
+      { id: '6', name: 'Python', level: 'Intermediate', category: 'technical' }
+    ],
+    projects: [],
+    certifications: [],
+    languages: [],
+    awards: [],
+    volunteerExperience: [],
+    publications: [],
+    references: [],
+    professionalSummary: {
+      id: 'summary-1',
+      summary: 'Experienced software engineer with 8+ years of expertise in full-stack development, cloud architecture, and team leadership. Proven track record of delivering scalable solutions and mentoring junior developers.'
+    },
+    workExperience: [
       {
         id: '1',
+        jobTitle: 'Senior Software Engineer',
         position: 'Senior Software Engineer',
+        companyName: 'Tech Solutions Inc.',
         company: 'Tech Solutions Inc.',
         location: 'New York, NY',
-        startDate: '2020',
-        endDate: 'Present',
-        description: 'Led development of microservices architecture serving 1M+ users\nImplemented CI/CD pipelines reducing deployment time by 60%\nMentored team of 5 junior developers'
-      },
-      {
-        id: '2',
-        position: 'Software Engineer',
-        company: 'StartupCorp',
-        location: 'San Francisco, CA',
-        startDate: '2018',
-        endDate: '2020',
-        description: 'Developed React-based web applications\nBuilt RESTful APIs using Node.js and Express\nCollaborated with design team on user experience improvements'
+        startDate: '2020-01',
+        endDate: '2024-01',
+        isCurrentJob: false,
+        responsibilities: ['Led development team', 'Architected solutions'],
+        achievements: ['Improved performance by 40%'],
+        description: 'Led development of scalable web applications\nArchitected cloud-based solutions\nMentored junior developers'
       }
     ],
     education: [
       {
         id: '1',
         degree: 'Bachelor of Science in Computer Science',
-        institution: 'University of Technology',
+        institution: 'MIT',
         location: 'Boston, MA',
         graduationYear: '2018',
         gpa: '3.8'
       }
     ],
-    skills: [
-      { id: '1', name: 'JavaScript', level: 'Expert', category: 'Programming' },
-      { id: '2', name: 'React', level: 'Expert', category: 'Frontend' },
-      { id: '3', name: 'Node.js', level: 'Advanced', category: 'Backend' },
-      { id: '4', name: 'AWS', level: 'Advanced', category: 'Cloud' },
-      { id: '5', name: 'Docker', level: 'Intermediate', category: 'DevOps' },
-      { id: '6', name: 'Python', level: 'Intermediate', category: 'Programming' }
-    ],
-    projects: [],
-    certifications: [],
-    languages: [],
-    awards: [],
+    template: template.id,
     createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
+    updatedAt: new Date().toISOString(),
+    isPublic: false
   };
 
   const featureDescriptions: Record<string, string> = {

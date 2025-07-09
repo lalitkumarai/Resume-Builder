@@ -193,7 +193,9 @@ export const ResumeProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   useEffect(() => {
     if (state.currentResume && !state.isSaving) {
       const autoSaveTimer = setTimeout(() => {
-        saveResume(state.currentResume);
+        if (state.currentResume) {
+          saveResume(state.currentResume);
+        }
       }, 30000); // Auto-save every 30 seconds
 
       return () => clearTimeout(autoSaveTimer);
