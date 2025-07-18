@@ -1,135 +1,82 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import { FaUser, FaSignOutAlt, FaCog, FaBars, FaTimes, FaRobot, FaLightbulb, FaBlog, FaFileAlt, FaChevronDown, FaBell, FaSearch, FaTachometerAlt, FaClipboard, FaBookOpen, FaEnvelope, FaPlus, FaHistory, FaDownload, FaStar, FaQuestionCircle, FaHeadset } from 'react-icons/fa';
+import {
+  FaUser,
+  FaSignOutAlt,
+  FaBars,
+  FaTimes,
+  FaFileAlt,
+  FaChevronDown,
+  FaTachometerAlt,
+  FaClipboard,
+  FaEnvelope,
+  FaPlus,
+  FaLightbulb,
+  FaCog,
+  FaQuestionCircle
+} from 'react-icons/fa';
 
 import { useAuth } from '../../context/AuthContext';
 
 const HeaderContainer = styled.header`
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   position: sticky;
   top: 0;
   z-index: 1000;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
-    backdrop-filter: blur(20px);
-    z-index: -1;
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  }
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 
   @media (prefers-reduced-motion: reduce) {
     transition: none;
-
-    * {
-      transition: none !important;
-      animation: none !important;
-    }
   }
 `;
 
 const Nav = styled.nav`
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 clamp(1.5rem, 4vw, 3rem);
+  padding: 0 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: clamp(75px, 10vw, 85px);
-  position: relative;
-  isolation: isolate;
-  gap: clamp(1rem, 3vw, 2rem);
+  height: 80px;
+  gap: 2rem;
 
   @media (max-width: 768px) {
-    height: 75px;
-    gap: 1rem;
-  }
-
-  @media (max-width: 480px) {
-    padding: 0 1.25rem;
+    padding: 0 1rem;
     height: 70px;
-    gap: 0.75rem;
+    gap: 1rem;
   }
 `;
 
 const Logo = styled(Link)`
-  font-size: clamp(1.4rem, 4vw, 1.9rem);
-  font-weight: 800;
+  font-size: 1.5rem;
+  font-weight: 700;
   color: white;
   text-decoration: none;
   display: flex;
   align-items: center;
-  gap: clamp(0.75rem, 2vw, 1rem);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  will-change: transform;
-  padding: 0.5rem 0.75rem;
-  border-radius: 12px;
-  position: relative;
-  overflow: hidden;
+  gap: 0.75rem;
+  transition: all 0.3s ease;
+  padding: 0.5rem;
+  border-radius: 8px;
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+  &:hover {
+    transform: translateY(-1px);
     background: rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  &:hover,
-  &:focus-visible {
-    transform: translateY(-2px) scale(1.02);
-    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-
-    &::before {
-      opacity: 1;
-    }
-  }
-
-  &:focus-visible {
-    outline: 2px solid rgba(255, 255, 255, 0.8);
-    outline-offset: 3px;
   }
 
   .logo-icon {
-    font-size: clamp(1.6rem, 5vw, 2.2rem);
-    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.2));
-    flex-shrink: 0;
-    background: linear-gradient(135deg, #ffffff, #f0f0f0);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    font-size: 1.8rem;
+    color: white;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
+  @media (max-width: 768px) {
+    font-size: 1.3rem;
 
-    &:hover {
-      transform: none;
+    .logo-icon {
+      font-size: 1.5rem;
     }
   }
 `;
@@ -137,21 +84,9 @@ const Logo = styled(Link)`
 const NavLinks = styled.div`
   display: flex;
   align-items: center;
-  gap: clamp(0.5rem, 1.5vw, 1rem);
-  overflow-x: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  padding: 0.5rem;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  gap: 0.5rem;
 
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  @media (max-width: 1200px) {
+  @media (max-width: 768px) {
     display: none;
   }
 `;
@@ -159,76 +94,28 @@ const NavLinks = styled.div`
 const NavLink = styled(Link)`
   color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
-  font-weight: 600;
-  padding: clamp(0.875rem, 2vw, 1.125rem);
-  border-radius: 16px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
+  font-weight: 500;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: clamp(48px, 10vw, 56px);
-  height: clamp(48px, 10vw, 56px);
-  backdrop-filter: blur(15px);
-  will-change: transform, background-color;
-  border: 1px solid transparent;
-  overflow: hidden;
+  gap: 0.5rem;
+  font-size: 0.9rem;
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    border-radius: 16px;
-  }
-
-  &:hover,
-  &:focus-visible {
-    background: rgba(255, 255, 255, 0.18);
+  &:hover {
+    background: rgba(255, 255, 255, 0.15);
     color: white;
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-    border-color: rgba(255, 255, 255, 0.2);
-
-    &::before {
-      opacity: 1;
-    }
-  }
-
-  &:focus-visible {
-    outline: 2px solid rgba(255, 255, 255, 0.8);
-    outline-offset: 3px;
+    transform: translateY(-1px);
   }
 
   &.active {
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.2);
     color: white;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-    border-color: rgba(255, 255, 255, 0.3);
-
-    &::before {
-      opacity: 1;
-    }
   }
 
   .nav-icon {
-    font-size: clamp(1.1rem, 3vw, 1.3rem);
-    opacity: 0.9;
-    flex-shrink: 0;
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    transition: background-color 0.2s ease;
-
-    &:hover {
-      transform: none;
-    }
+    font-size: 1rem;
   }
 `;
 
@@ -236,230 +123,60 @@ const UserMenu = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  gap: clamp(0.75rem, 2vw, 1.25rem);
-  padding: 0.5rem;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  gap: 1rem;
 `;
 
 const QuickActionButton = styled(Link)`
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.875rem 1.5rem;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
   background: linear-gradient(135deg, #28a745, #20c997);
   color: white;
   text-decoration: none;
-  border-radius: 16px;
-  font-weight: 700;
+  border-radius: 8px;
+  font-weight: 600;
   font-size: 0.9rem;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 16px rgba(40, 167, 69, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
+  transition: all 0.3s ease;
 
   &:hover {
     background: linear-gradient(135deg, #218838, #1ea085);
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 6px 24px rgba(40, 167, 69, 0.4);
-
-    &::before {
-      opacity: 1;
-    }
+    transform: translateY(-1px);
   }
 
   .action-icon {
     font-size: 0.9rem;
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
   }
 
-  @media (max-width: 1200px) {
+  @media (max-width: 768px) {
     display: none;
   }
 `;
 
-const SearchButton = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.12);
-  color: white;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  backdrop-filter: blur(15px);
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.25);
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-    border-color: rgba(255, 255, 255, 0.3);
-
-    &::before {
-      opacity: 1;
-    }
-  }
-
-  svg {
-    font-size: 1.1rem;
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
-  }
-
-  @media (max-width: 1200px) {
-    display: none;
-  }
-`;
-
-const NotificationButton = styled.button`
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.12);
-  color: white;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  backdrop-filter: blur(15px);
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.25);
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-    border-color: rgba(255, 255, 255, 0.3);
-
-    &::before {
-      opacity: 1;
-    }
-  }
-
-  svg {
-    font-size: 1.1rem;
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
-  }
-
-  .notification-badge {
-    position: absolute;
-    top: -3px;
-    right: -3px;
-    width: 10px;
-    height: 10px;
-    background: linear-gradient(135deg, #ff4757, #ff3742);
-    border-radius: 50%;
-    border: 2px solid white;
-    box-shadow: 0 2px 6px rgba(255, 71, 87, 0.4);
-    animation: pulse 2s infinite;
-  }
-
-  @keyframes pulse {
-    0% {
-      transform: scale(1);
-      opacity: 1;
-    }
-    50% {
-      transform: scale(1.1);
-      opacity: 0.8;
-    }
-    100% {
-      transform: scale(1);
-      opacity: 1;
-    }
-  }
-`;
+// Removed SearchButton and NotificationButton to reduce clutter
 
 const UserButton = styled.button`
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 0.75rem 1.25rem;
+  gap: 0.75rem;
+  padding: 0.5rem 1rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 28px;
-  background: rgba(255, 255, 255, 0.12);
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.1);
   color: white;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  backdrop-filter: blur(15px);
-  font-weight: 600;
-  font-size: 0.95rem;
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
+  transition: all 0.3s ease;
+  font-weight: 500;
+  font-size: 0.9rem;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.25);
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-    border-color: rgba(255, 255, 255, 0.3);
-
-    &::before {
-      opacity: 1;
-    }
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
   }
 
   .chevron {
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    font-size: 0.85rem;
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+    transition: transform 0.3s ease;
+    font-size: 0.8rem;
   }
 
   &.open .chevron {
@@ -468,44 +185,29 @@ const UserButton = styled.button`
 `;
 
 const UserAvatar = styled.div`
-  width: 42px;
-  height: 42px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   background: linear-gradient(135deg, #ff6b6b, #feca57);
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 700;
-  font-size: 1rem;
-  border: 3px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
-    opacity: 0.5;
-  }
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
 `;
 
 const DropdownMenu = styled.div`
   position: absolute;
-  top: calc(100% + 0.75rem);
+  top: calc(100% + 0.5rem);
   right: 0;
   background: white;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 16px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-  min-width: 280px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  min-width: 220px;
   overflow: hidden;
-  backdrop-filter: blur(20px);
   animation: dropdownFadeIn 0.3s ease;
 
   @keyframes dropdownFadeIn {
@@ -621,80 +323,29 @@ const DropdownSection = styled.div`
   padding: 0.5rem 0;
 `;
 
-const DropdownSectionTitle = styled.div`
-  padding: 0.5rem 1rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: #666;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-`;
+// Removed DropdownSectionTitle as it's no longer used
 
 const MobileMenuButton = styled.button`
   display: none;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 16px;
-  width: clamp(48px, 10vw, 52px);
-  height: clamp(48px, 10vw, 52px);
-  font-size: clamp(1.1rem, 3vw, 1.3rem);
+  border-radius: 8px;
+  width: 44px;
+  height: 44px;
+  font-size: 1.1rem;
   color: white;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  backdrop-filter: blur(15px);
-  will-change: transform, background-color;
-  position: relative;
-  overflow: hidden;
+  transition: all 0.3s ease;
+  align-items: center;
+  justify-content: center;
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
-    opacity: 0;
-    transition: opacity 0.3s ease;
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
   }
 
-  &:hover,
-  &:focus-visible {
-    background: rgba(255, 255, 255, 0.25);
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-    border-color: rgba(255, 255, 255, 0.3);
-
-    &::before {
-      opacity: 1;
-    }
-  }
-
-  &:focus-visible {
-    outline: 2px solid rgba(255, 255, 255, 0.8);
-    outline-offset: 3px;
-  }
-
-  &:active {
-    transform: translateY(0) scale(0.98);
-  }
-
-  svg {
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
-  }
-
-  @media (max-width: 1200px) {
+  @media (max-width: 768px) {
     display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    transition: background-color 0.2s ease;
-
-    &:hover {
-      transform: none;
-    }
   }
 `;
 
@@ -902,67 +553,32 @@ const Header: React.FC = () => {
           <NavLink
             to="/templates"
             className={isActiveLink('/templates') ? 'active' : ''}
-            title="Resume Templates"
           >
             <FaClipboard className="nav-icon" />
-          </NavLink>
-          <NavLink
-            to="/cover-letter-templates"
-            className={isActiveLink('/cover-letter-templates') ? 'active' : ''}
-            title="Cover Letters"
-          >
-            <FaEnvelope className="nav-icon" />
+            Templates
           </NavLink>
           <NavLink
             to="/resume-guide"
             className={isActiveLink('/resume-guide') ? 'active' : ''}
-            title="Resume Guide"
           >
             <FaLightbulb className="nav-icon" />
-          </NavLink>
-          <NavLink
-            to="/blog"
-            className={isActiveLink('/blog') ? 'active' : ''}
-            title="Career Blog"
-          >
-            <FaBlog className="nav-icon" />
-          </NavLink>
-          <NavLink
-            to="/ats-tips"
-            className={isActiveLink('/ats-tips') ? 'active' : ''}
-            title="ATS Tips"
-          >
-            <FaRobot className="nav-icon" />
+            Guide
           </NavLink>
           {isAuthenticated && (
             <>
               <NavLink
                 to="/dashboard"
                 className={isActiveLink('/dashboard') ? 'active' : ''}
-                title="Dashboard"
               >
                 <FaTachometerAlt className="nav-icon" />
+                Dashboard
               </NavLink>
               <NavLink
                 to="/builder"
                 className={isActiveLink('/builder') ? 'active' : ''}
-                title="Resume Builder"
               >
                 <FaFileAlt className="nav-icon" />
-              </NavLink>
-              <NavLink
-                to="/cover-letter-builder"
-                className={isActiveLink('/cover-letter-builder') ? 'active' : ''}
-                title="Cover Letter Builder"
-              >
-                <FaEnvelope className="nav-icon" />
-              </NavLink>
-              <NavLink
-                to="/ats-optimizer"
-                className={isActiveLink('/ats-optimizer') ? 'active' : ''}
-                title="ATS Optimizer"
-              >
-                <FaRobot className="nav-icon" />
+                Builder
               </NavLink>
             </>
           )}
@@ -974,15 +590,6 @@ const Header: React.FC = () => {
               <FaPlus className="action-icon" />
               New Resume
             </QuickActionButton>
-
-            <SearchButton title="Search">
-              <FaSearch />
-            </SearchButton>
-
-            <NotificationButton title="Notifications">
-              <FaBell />
-              <div className="notification-badge"></div>
-            </NotificationButton>
 
             <UserButton
               onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -1006,45 +613,25 @@ const Header: React.FC = () => {
                 </DropdownHeader>
 
                 <DropdownSection>
-                  <DropdownSectionTitle>Quick Actions</DropdownSectionTitle>
-                  <DropdownItem to="/builder" onClick={() => setDropdownOpen(false)}>
-                    <FaPlus className="dropdown-icon" /> Create New Resume
-                  </DropdownItem>
                   <DropdownItem to="/dashboard" onClick={() => setDropdownOpen(false)}>
                     <FaTachometerAlt className="dropdown-icon" /> Dashboard
                   </DropdownItem>
-                  <DropdownItem to="/dashboard?tab=resumes" onClick={() => setDropdownOpen(false)}>
-                    <FaHistory className="dropdown-icon" /> My Resumes
-                  </DropdownItem>
-                </DropdownSection>
-
-                <DropdownDivider />
-
-                <DropdownSection>
-                  <DropdownSectionTitle>Tools & Features</DropdownSectionTitle>
-                  <DropdownItem to="/cover-letter-builder" onClick={() => setDropdownOpen(false)}>
-                    <FaEnvelope className="dropdown-icon" /> Cover Letter Builder
-                  </DropdownItem>
-                  <DropdownItem to="/ats-optimizer" onClick={() => setDropdownOpen(false)}>
-                    <FaRobot className="dropdown-icon" /> ATS Optimizer
+                  <DropdownItem to="/builder" onClick={() => setDropdownOpen(false)}>
+                    <FaPlus className="dropdown-icon" /> Create Resume
                   </DropdownItem>
                   <DropdownItem to="/templates" onClick={() => setDropdownOpen(false)}>
-                    <FaStar className="dropdown-icon" /> Browse Templates
+                    <FaClipboard className="dropdown-icon" /> Templates
                   </DropdownItem>
                 </DropdownSection>
 
                 <DropdownDivider />
 
                 <DropdownSection>
-                  <DropdownSectionTitle>Account & Support</DropdownSectionTitle>
                   <DropdownItem to="/profile" onClick={() => setDropdownOpen(false)}>
-                    <FaUser className="dropdown-icon" /> Profile Settings
+                    <FaUser className="dropdown-icon" /> Profile
                   </DropdownItem>
                   <DropdownItem to="/help" onClick={() => setDropdownOpen(false)}>
-                    <FaQuestionCircle className="dropdown-icon" /> Help Center
-                  </DropdownItem>
-                  <DropdownItem to="/support" onClick={() => setDropdownOpen(false)}>
-                    <FaHeadset className="dropdown-icon" /> Contact Support
+                    <FaQuestionCircle className="dropdown-icon" /> Help
                   </DropdownItem>
                 </DropdownSection>
 
@@ -1085,35 +672,14 @@ const Header: React.FC = () => {
             className={isActiveLink('/templates') ? 'active' : ''}
             onClick={closeMobileMenu}
           >
-            <FaClipboard /> Resume Templates
-          </MobileNavLink>
-          <MobileNavLink
-            to="/cover-letter-templates"
-            className={isActiveLink('/cover-letter-templates') ? 'active' : ''}
-            onClick={closeMobileMenu}
-          >
-            <FaEnvelope /> Cover Letters
+            <FaClipboard /> Templates
           </MobileNavLink>
           <MobileNavLink
             to="/resume-guide"
             className={isActiveLink('/resume-guide') ? 'active' : ''}
             onClick={closeMobileMenu}
           >
-            <FaLightbulb /> Resume Guide
-          </MobileNavLink>
-          <MobileNavLink
-            to="/blog"
-            className={isActiveLink('/blog') ? 'active' : ''}
-            onClick={closeMobileMenu}
-          >
-            <FaBlog /> Blog
-          </MobileNavLink>
-          <MobileNavLink
-            to="/ats-tips"
-            className={isActiveLink('/ats-tips') ? 'active' : ''}
-            onClick={closeMobileMenu}
-          >
-            <FaRobot /> ATS Tips
+            <FaLightbulb /> Guide
           </MobileNavLink>
 
           {isAuthenticated ? (
@@ -1124,7 +690,7 @@ const Header: React.FC = () => {
                 onClick={closeMobileMenu}
                 style={{ background: 'linear-gradient(135deg, #28a745, #20c997)', color: 'white', fontWeight: '600' }}
               >
-                <FaPlus /> Create New Resume
+                <FaPlus /> Create Resume
               </MobileNavLink>
               <MobileNavLink
                 to="/dashboard"
@@ -1134,37 +700,17 @@ const Header: React.FC = () => {
                 <FaTachometerAlt /> Dashboard
               </MobileNavLink>
               <MobileNavLink
-                to="/dashboard?tab=resumes"
-                onClick={closeMobileMenu}
-              >
-                <FaHistory /> My Resumes
-              </MobileNavLink>
-              <MobileNavLink
-                to="/cover-letter-builder"
-                className={isActiveLink('/cover-letter-builder') ? 'active' : ''}
-                onClick={closeMobileMenu}
-              >
-                <FaEnvelope /> Cover Letter Builder
-              </MobileNavLink>
-              <MobileNavLink
-                to="/ats-optimizer"
-                className={isActiveLink('/ats-optimizer') ? 'active' : ''}
-                onClick={closeMobileMenu}
-              >
-                <FaRobot /> ATS Optimizer
-              </MobileNavLink>
-              <MobileNavLink
                 to="/profile"
                 className={isActiveLink('/profile') ? 'active' : ''}
                 onClick={closeMobileMenu}
               >
-                <FaUser /> Profile Settings
+                <FaUser /> Profile
               </MobileNavLink>
               <MobileNavLink
                 to="/help"
                 onClick={closeMobileMenu}
               >
-                <FaQuestionCircle /> Help Center
+                <FaQuestionCircle /> Help
               </MobileNavLink>
               <MobileNavLink as="button" onClick={handleLogout} style={{ border: 'none', background: 'rgba(255, 255, 255, 0.1)', cursor: 'pointer' }}>
                 <FaSignOutAlt /> Sign Out
