@@ -3,6 +3,11 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 // import { ToastContainer } from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css';
 
+// Smooth Scrolling
+import LenisProvider from './components/SmoothScrolling/LenisProvider';
+import ScrollToTop from './components/SmoothScrolling/ScrollToTop';
+import './styles/lenis.css';
+
 // Components
 import Header from './components/Layout/Header';
 import Footer from './components/Layout/Footer';
@@ -35,12 +40,22 @@ import './App.css';
 
 const App: React.FC = () => {
   return (
-    <AuthProvider>
-      <ResumeProvider>
-        <Router>
-          <div className="App">
-            <Header />
-            <main className="main-content">
+    <LenisProvider
+      options={{
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smooth: true,
+        mouseMultiplier: 1,
+        smoothTouch: false,
+        touchMultiplier: 2,
+      }}
+    >
+      <AuthProvider>
+        <ResumeProvider>
+          <Router>
+            <div className="App">
+              <Header />
+              <main className="main-content">
               <Routes>
                 {/* Public Routes */}
                 <Route path="/" element={<Home />} />
@@ -99,6 +114,9 @@ const App: React.FC = () => {
             </main>
             <Footer />
 
+            {/* Smooth Scroll to Top Button */}
+            <ScrollToTop />
+
             {/* Toast notifications */}
             {/* <ToastContainer
               position="top-right"
@@ -116,6 +134,7 @@ const App: React.FC = () => {
         </Router>
       </ResumeProvider>
     </AuthProvider>
+    </LenisProvider>
   );
 };
 

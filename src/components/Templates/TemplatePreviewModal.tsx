@@ -44,15 +44,29 @@ const HeaderInfo = styled.div`
 `;
 
 const TemplateName = styled.h2`
-  color: #333;
+  color: #1e293b;
   margin: 0 0 0.5rem 0;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
+  font-weight: 800;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    border-radius: 2px;
+  }
 `;
 
 const TemplateDescription = styled.p`
-  color: #666;
+  color: #64748b;
   margin: 0 0 1rem 0;
-  line-height: 1.5;
+  line-height: 1.6;
+  font-weight: 500;
 `;
 
 const TemplateMeta = styled.div`
@@ -63,12 +77,23 @@ const TemplateMeta = styled.div`
 `;
 
 const MetaItem = styled.span`
-  padding: 4px 12px;
-  background: #f8f9ff;
-  color: #667eea;
-  border-radius: 12px;
-  font-size: 0.85rem;
-  font-weight: 500;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(79, 70, 229, 0.15) 100%);
+  color: #6366f1;
+  border-radius: 15px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+  }
 `;
 
 const Badge = styled.span<{ type: 'popular' | 'new' | 'premium' }>`

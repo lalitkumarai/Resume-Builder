@@ -17,20 +17,56 @@ const Header = styled.div`
 `;
 
 const Title = styled.h1`
-  color: #333;
-  font-size: 2.5rem;
+  color: #6366f1;
+  font-size: 2.8rem;
   margin-bottom: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1rem;
+  font-weight: 800;
+  text-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+  position: relative;
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(79, 70, 229, 0.1) 100%);
+    border-radius: 20px;
+    z-index: -1;
+    filter: blur(20px);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 5px;
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    border-radius: 3px;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+  }
 `;
 
 const Subtitle = styled.p`
-  color: #666;
+  color: #64748b;
   font-size: 1.2rem;
   max-width: 700px;
   margin: 0 auto;
+  line-height: 1.6;
+  font-weight: 500;
 `;
 
 const FilterSection = styled.div`

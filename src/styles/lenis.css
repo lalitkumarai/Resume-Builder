@@ -1,0 +1,88 @@
+/* Lenis Smooth Scrolling Styles */
+
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+/* Optimize scrolling performance */
+* {
+  scroll-behavior: auto !important;
+}
+
+/* Ensure smooth scrolling works with fixed elements */
+.lenis-smooth .fixed-element {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Optimize for better performance */
+body {
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar for better visual feedback */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(30, 41, 59, 0.1);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+  transform: scale(1.1);
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #6366f1 rgba(30, 41, 59, 0.1);
+}
+
+/* Smooth transitions for elements that might jump during scroll */
+.smooth-element {
+  transition: transform 0.1s ease-out;
+  will-change: transform;
+}
+
+/* Prevent layout shifts during smooth scrolling */
+img, video, iframe {
+  transform: translateZ(0);
+}
+
+/* Optimize text rendering during scroll */
+.text-content {
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure buttons and interactive elements work well with Lenis */
+button, a, input, textarea, select {
+  touch-action: manipulation;
+}
+
+/* Prevent scroll issues on mobile */
+@media (max-width: 768px) {
+  body {
+    -webkit-overflow-scrolling: touch;
+  }
+}

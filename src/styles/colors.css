@@ -1,0 +1,189 @@
+/* Modern Color Palette for Resume Builder */
+
+:root {
+  /* Single Color Theme - Modern Indigo */
+  --primary-color: #6366f1;
+  --primary-light: #818cf8;
+  --primary-lighter: #a5b4fc;
+  --primary-lightest: #c7d2fe;
+  --primary-dark: #4f46e5;
+  --primary-darker: #4338ca;
+  --primary-darkest: #3730a3;
+
+  /* Monochromatic Gradients */
+  --primary-gradient: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  --secondary-gradient: linear-gradient(135deg, #818cf8 0%, #6366f1 100%);
+  --accent-gradient: linear-gradient(135deg, #a5b4fc 0%, #818cf8 100%);
+
+  /* Background Gradients */
+  --hero-bg: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  --features-bg: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  --templates-bg: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  --header-bg: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  
+  /* Glass Morphism */
+  --glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+  --glass-border: rgba(99, 102, 241, 0.2);
+  --glass-shadow: 0 20px 40px rgba(99, 102, 241, 0.1);
+
+  /* Dark Glass */
+  --dark-glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
+  --dark-glass-shadow: 0 25px 50px rgba(99, 102, 241, 0.2);
+  
+  /* Text Colors */
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+  --text-light: #64748b;
+  --text-white: #ffffff;
+  --text-white-soft: rgba(255, 255, 255, 0.95);
+  --text-white-muted: rgba(255, 255, 255, 0.8);
+  --text-dark: #0f172a;
+  --text-muted: #94a3b8;
+  --text-indigo: #6366f1;
+  --text-indigo-light: #818cf8;
+  --text-indigo-dark: #4f46e5;
+  
+  /* Monochromatic Scale */
+  --indigo-50: #eef2ff;
+  --indigo-100: #e0e7ff;
+  --indigo-200: #c7d2fe;
+  --indigo-300: #a5b4fc;
+  --indigo-400: #818cf8;
+  --indigo-500: #6366f1;
+  --indigo-600: #4f46e5;
+  --indigo-700: #4338ca;
+  --indigo-800: #3730a3;
+  --indigo-900: #312e81;
+  
+  /* Neutral Colors */
+  --slate-50: #f8fafc;
+  --slate-100: #f1f5f9;
+  --slate-200: #e2e8f0;
+  --slate-300: #cbd5e1;
+  --slate-400: #94a3b8;
+  --slate-500: #64748b;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-800: #1e293b;
+  --slate-900: #0f172a;
+  
+  /* Shadow Colors */
+  --shadow-primary: rgba(99, 102, 241, 0.25);
+  --shadow-primary-light: rgba(99, 102, 241, 0.15);
+  --shadow-primary-dark: rgba(79, 70, 229, 0.3);
+
+  /* Hover Shadow Colors */
+  --shadow-primary-hover: rgba(99, 102, 241, 0.4);
+  --shadow-primary-light-hover: rgba(99, 102, 241, 0.25);
+  --shadow-primary-dark-hover: rgba(79, 70, 229, 0.5);
+}
+
+/* Utility Classes */
+.gradient-text {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-secondary {
+  background: var(--secondary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-light {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-white {
+  color: var(--text-white) !important;
+}
+
+.text-white-soft {
+  color: var(--text-white-soft) !important;
+}
+
+.text-white-muted {
+  color: var(--text-white-muted) !important;
+}
+
+.text-primary {
+  color: var(--text-primary) !important;
+}
+
+.text-secondary {
+  color: var(--text-secondary) !important;
+}
+
+.text-indigo {
+  color: var(--text-indigo) !important;
+}
+
+.text-indigo-light {
+  color: var(--text-indigo-light) !important;
+}
+
+.text-indigo-dark {
+  color: var(--text-indigo-dark) !important;
+}
+
+.text-shadow {
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.text-shadow-light {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.text-shadow-indigo {
+  text-shadow: 0 2px 8px rgba(99, 102, 241, 0.5);
+}
+
+.text-glow-indigo {
+  text-shadow: 0 0 10px rgba(99, 102, 241, 0.5), 0 0 20px rgba(99, 102, 241, 0.3);
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.dark-glass-card {
+  background: var(--dark-glass-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: var(--dark-glass-shadow);
+}
+
+.primary-button {
+  background: var(--primary-gradient);
+  color: var(--text-white);
+  box-shadow: 0 8px 25px var(--shadow-primary);
+  transition: all 0.3s ease;
+}
+
+.primary-button:hover {
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-darker) 100%);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 12px 35px var(--shadow-primary-hover);
+}
+
+.secondary-button {
+  background: var(--secondary-gradient);
+  color: var(--text-white);
+  box-shadow: 0 8px 25px var(--shadow-primary-light);
+  transition: all 0.3s ease;
+}
+
+.secondary-button:hover {
+  background: var(--primary-gradient);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 12px 35px var(--shadow-primary-hover);
+}

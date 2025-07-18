@@ -15,10 +15,11 @@ const PageContainer = styled.div`
 const Header = styled.div`
   text-align: center;
   margin-bottom: 3rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
   color: white;
   padding: 3rem 2rem;
   border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
 `;
 
 const Title = styled.h1`

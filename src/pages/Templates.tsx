@@ -20,16 +20,64 @@ const Header = styled.div`
 `;
 
 const Title = styled.h1`
-  color: #333;
-  font-size: 2.5rem;
+  color: #6366f1;
+  font-size: 2.8rem;
   margin-bottom: 1rem;
+  font-weight: 800;
+  text-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+  position: relative;
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(79, 70, 229, 0.1) 100%);
+    border-radius: 20px;
+    z-index: -1;
+    filter: blur(20px);
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    width: 120px;
+    height: 5px;
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    margin: 1.5rem auto 0;
+    border-radius: 3px;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+  }
 `;
 
 const Subtitle = styled.p`
-  color: #666;
-  font-size: 1.2rem;
-  max-width: 600px;
+  color: #64748b;
+  font-size: 1.3rem;
+  max-width: 700px;
   margin: 0 auto;
+  line-height: 1.7;
+  font-weight: 600;
+  position: relative;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(79, 70, 229, 0.05) 100%);
+  border-radius: 15px;
+  border: 1px solid rgba(99, 102, 241, 0.1);
+
+  &::before {
+    content: '✨';
+    position: absolute;
+    left: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+  }
 `;
 
 const FilterSection = styled.div`
@@ -61,25 +109,41 @@ const SearchBox = styled.div`
 
 const SearchInput = styled.input`
   width: 100%;
-  padding: 12px 20px 12px 45px;
+  padding: 15px 20px 15px 50px;
   border: 2px solid #e9ecef;
-  border-radius: 10px;
-  font-size: 1rem;
+  border-radius: 15px;
+  font-size: 1.1rem;
+  font-weight: 600;
   transition: all 0.3s ease;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.9) 100%);
 
   &:focus {
     outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    border-color: #6366f1;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15), 0 8px 25px rgba(99, 102, 241, 0.2);
+    background: white;
+    transform: translateY(-2px);
+  }
+
+  &::placeholder {
+    color: #94a3b8;
+    font-weight: 500;
   }
 `;
 
 const SearchIcon = styled.div`
   position: absolute;
-  left: 15px;
+  left: 18px;
   top: 50%;
   transform: translateY(-50%);
-  color: #999;
+  color: #6366f1;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+
+  ${SearchInput}:focus + & {
+    color: #4f46e5;
+    transform: translateY(-50%) scale(1.1);
+  }
 `;
 
 const CategoryFilter = styled.div`
@@ -90,17 +154,20 @@ const CategoryFilter = styled.div`
 
 const CategoryButton = styled.button<{ active: boolean }>`
   padding: 8px 16px;
-  border: 2px solid ${props => props.active ? '#667eea' : '#e9ecef'};
-  background: ${props => props.active ? '#667eea' : 'white'};
-  color: ${props => props.active ? 'white' : '#666'};
+  border: 2px solid ${props => props.active ? '#6366f1' : '#e9ecef'};
+  background: ${props => props.active ? '#6366f1' : 'white'};
+  color: ${props => props.active ? 'white' : '#64748b'};
   border-radius: 20px;
   font-size: 0.9rem;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
 
   &:hover {
-    border-color: #667eea;
-    background: ${props => props.active ? '#5a6fd8' : '#f8f9ff'};
+    border-color: #6366f1;
+    background: ${props => props.active ? '#4f46e5' : '#f1f5f9'};
+    color: ${props => props.active ? 'white' : '#6366f1'};
+    transform: translateY(-1px);
   }
 `;
 
@@ -112,7 +179,19 @@ const ResultsHeader = styled.div`
 `;
 
 const ResultsCount = styled.p`
-  color: #666;
+  color: #64748b;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(79, 70, 229, 0.1) 100%);
+  border-radius: 10px;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+
+  strong {
+    color: #6366f1;
+    font-weight: 800;
+    text-shadow: 0 1px 3px rgba(99, 102, 241, 0.3);
+  }
   font-size: 1rem;
 `;
 
@@ -207,16 +286,36 @@ const TemplateBadges = styled.div`
 `;
 
 const Badge = styled.span<{ type: 'popular' | 'new' | 'premium' }>`
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 0.7rem;
-  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 15px;
+  font-size: 0.75rem;
+  font-weight: 800;
   color: white;
   background: ${props =>
-    props.type === 'popular' ? '#ff6b6b' :
-    props.type === 'new' ? '#4ecdc4' :
-    '#f39c12'
+    props.type === 'popular' ? 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)' :
+    props.type === 'new' ? 'linear-gradient(135deg, #818cf8 0%, #6366f1 100%)' :
+    'linear-gradient(135deg, #4f46e5 0%, #4338ca 100%)'
   };
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+  }
+
+  &:hover::before {
+    left: 100%;
+  }
 `;
 
 const TemplateInfo = styled.div`
@@ -224,16 +323,51 @@ const TemplateInfo = styled.div`
 `;
 
 const TemplateName = styled.h3`
-  color: #333;
-  font-size: 1.2rem;
+  color: #1e293b;
+  font-size: 1.3rem;
   margin-bottom: 0.5rem;
+  font-weight: 800;
+  transition: all 0.3s ease;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+  }
+
+  ${TemplateCard}:hover & {
+    color: #6366f1;
+    text-shadow: 0 2px 10px rgba(99, 102, 241, 0.3);
+
+    &::before {
+      width: 100%;
+    }
+  }
 `;
 
 const TemplateDescription = styled.p`
-  color: #666;
-  font-size: 0.9rem;
-  line-height: 1.4;
+  color: #64748b;
+  font-size: 0.95rem;
+  line-height: 1.6;
   margin-bottom: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+
+  ${TemplateCard}:hover & {
+    color: #475569;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(79, 70, 229, 0.05) 100%);
+    padding: 0.5rem;
+    border-radius: 8px;
+    border-left: 3px solid #6366f1;
+  }
 `;
 
 const TemplateFeatures = styled.div`
@@ -244,11 +378,38 @@ const TemplateFeatures = styled.div`
 `;
 
 const FeatureTag = styled.span`
-  padding: 3px 8px;
-  background: #f8f9ff;
-  color: #667eea;
-  border-radius: 12px;
-  font-size: 0.75rem;
+  padding: 6px 12px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(79, 70, 229, 0.15) 100%);
+  color: #6366f1;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+  }
+
+  &:hover {
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    color: white;
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+
+    &::before {
+      left: 100%;
+    }
+  }
 `;
 
 const TemplateActions = styled.div`
@@ -258,12 +419,13 @@ const TemplateActions = styled.div`
 
 const ActionButton = styled.button<{ primary?: boolean }>`
   flex: 1;
-  padding: 10px;
-  border: 2px solid ${props => props.primary ? '#667eea' : '#e9ecef'};
-  background: ${props => props.primary ? '#667eea' : 'white'};
-  color: ${props => props.primary ? 'white' : '#666'};
-  border-radius: 8px;
+  padding: 12px;
+  border: 2px solid ${props => props.primary ? '#6366f1' : '#e9ecef'};
+  background: ${props => props.primary ? 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)' : 'white'};
+  color: ${props => props.primary ? 'white' : '#64748b'};
+  border-radius: 10px;
   font-size: 0.9rem;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
   display: flex;
@@ -272,8 +434,11 @@ const ActionButton = styled.button<{ primary?: boolean }>`
   gap: 0.5rem;
 
   &:hover {
-    background: ${props => props.primary ? '#5a6fd8' : '#f8f9ff'};
-    border-color: #667eea;
+    background: ${props => props.primary ? 'linear-gradient(135deg, #4f46e5 0%, #4338ca 100%)' : '#f1f5f9'};
+    border-color: #6366f1;
+    color: ${props => props.primary ? 'white' : '#6366f1'};
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
   }
 `;
 
@@ -412,7 +577,7 @@ const Templates: React.FC<TemplatesProps> = () => {
 
       <ResultsHeader>
         <ResultsCount>
-          {filteredTemplates.length} template{filteredTemplates.length !== 1 ? 's' : ''} found
+          <strong>{filteredTemplates.length}</strong> template{filteredTemplates.length !== 1 ? 's' : ''} found
         </ResultsCount>
         <SortSelect value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
           <option value="popular">Most Popular</option>

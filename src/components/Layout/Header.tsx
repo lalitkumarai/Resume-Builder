@@ -18,15 +18,17 @@ import {
 } from 'react-icons/fa';
 
 import { useAuth } from '../../context/AuthContext';
+import { useLenis } from '../../hooks/useLenis';
 
 const HeaderContainer = styled.header`
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   position: sticky;
   top: 0;
   z-index: 1000;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 32px rgba(99, 102, 241, 0.3);
 
   @media (prefers-reduced-motion: reduce) {
     transition: none;
@@ -52,24 +54,27 @@ const Nav = styled.nav`
 
 const Logo = styled(Link)`
   font-size: 1.5rem;
-  font-weight: 700;
-  color: white;
+  font-weight: 800;
+  color: #ffffff;
   text-decoration: none;
   display: flex;
   align-items: center;
   gap: 0.75rem;
   transition: all 0.3s ease;
   padding: 0.5rem;
-  border-radius: 8px;
+  border-radius: 12px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 
   &:hover {
-    transform: translateY(-1px);
-    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px) scale(1.05);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 20px rgba(129, 140, 248, 0.3);
   }
 
   .logo-icon {
     font-size: 1.8rem;
-    color: white;
+    color: #ffffff;
+    filter: drop-shadow(0 2px 4px rgba(99, 102, 241, 0.5));
   }
 
   @media (max-width: 768px) {
@@ -92,30 +97,34 @@ const NavLinks = styled.div`
 `;
 
 const NavLink = styled(Link)`
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.95);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
   padding: 0.75rem 1rem;
-  border-radius: 8px;
+  border-radius: 12px;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
   gap: 0.5rem;
   font-size: 0.9rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 
   &:hover {
-    background: rgba(255, 255, 255, 0.15);
-    color: white;
-    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 4px 15px rgba(129, 140, 248, 0.3);
   }
 
   &.active {
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
+    background: rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(129, 140, 248, 0.4);
   }
 
   .nav-icon {
     font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
   }
 `;
 
@@ -131,17 +140,36 @@ const QuickActionButton = styled(Link)`
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1.25rem;
-  background: linear-gradient(135deg, #28a745, #20c997);
+  background: linear-gradient(135deg, #818cf8 0%, #6366f1 100%);
   color: white;
   text-decoration: none;
-  border-radius: 8px;
+  border-radius: 12px;
   font-weight: 600;
   font-size: 0.9rem;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+  }
 
   &:hover {
-    background: linear-gradient(135deg, #218838, #1ea085);
-    transform: translateY(-1px);
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+
+    &::before {
+      left: 100%;
+    }
   }
 
   .action-icon {
@@ -160,23 +188,28 @@ const UserButton = styled.button`
   align-items: center;
   gap: 0.75rem;
   padding: 0.5rem 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 25px;
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 0.9rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
 
   &:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
   }
 
   .chevron {
     transition: transform 0.3s ease;
     font-size: 0.8rem;
+    color: #ffffff;
   }
 
   &.open .chevron {
@@ -252,14 +285,16 @@ const DropdownUserInfo = styled.div`
   }
 
   .user-name {
-    font-weight: 600;
-    color: #333;
+    font-weight: 700;
+    color: #1e293b;
     margin-bottom: 0.25rem;
+    font-size: 0.95rem;
   }
 
   .user-email {
-    font-size: 0.85rem;
-    color: #666;
+    font-size: 0.8rem;
+    color: #6366f1;
+    font-weight: 500;
   }
 `;
 
@@ -268,21 +303,29 @@ const DropdownItem = styled(Link)`
   align-items: center;
   gap: 0.75rem;
   padding: 0.875rem 1rem;
-  color: #333;
+  color: #475569;
   text-decoration: none;
-  transition: all 0.2s ease;
-  font-weight: 500;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  border-radius: 8px;
+  margin: 0 0.5rem;
 
   &:hover {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: white;
-    transform: translateX(4px);
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    color: #ffffff;
+    transform: translateX(4px) scale(1.02);
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
   }
 
   .dropdown-icon {
     width: 18px;
     text-align: center;
-    opacity: 0.7;
+    color: #6366f1;
+    transition: all 0.3s ease;
+  }
+
+  &:hover .dropdown-icon {
+    color: #ffffff;
   }
 `;
 
@@ -291,24 +334,28 @@ const DropdownButton = styled.button`
   align-items: center;
   gap: 0.75rem;
   padding: 0.875rem 1rem;
-  width: 100%;
+  width: calc(100% - 1rem);
   border: none;
   background: none;
-  color: #333;
+  color: #dc2626;
   text-align: left;
   cursor: pointer;
-  transition: all 0.2s ease;
-  font-weight: 500;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  border-radius: 8px;
+  margin: 0 0.5rem;
 
   &:hover {
-    background: linear-gradient(135deg, #ff6b6b, #feca57);
-    color: white;
-    transform: translateX(4px);
+    background: linear-gradient(135deg, #dc2626, #ef4444);
+    color: #ffffff;
+    transform: translateX(4px) scale(1.02);
+    box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
   }
 
   .dropdown-icon {
     width: 18px;
     text-align: center;
+    transition: opacity 0.3s ease;
     opacity: 0.7;
   }
 `;
@@ -327,21 +374,25 @@ const DropdownSection = styled.div`
 
 const MobileMenuButton = styled.button`
   display: none;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  width: 44px;
-  height: 44px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  width: 48px;
+  height: 48px;
   font-size: 1.1rem;
-  color: white;
+  color: #ffffff;
   cursor: pointer;
   transition: all 0.3s ease;
   align-items: center;
   justify-content: center;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 
   &:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
   }
 
   @media (max-width: 768px) {
@@ -380,29 +431,37 @@ const MobileMenuContent = styled.div`
 `;
 
 const MobileNavLink = styled(Link)`
-  color: white;
+  color: #ffffff;
   text-decoration: none;
   font-weight: 600;
   padding: 1rem;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.15);
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 
   &:hover,
   &:focus-visible {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 4px 15px rgba(129, 140, 248, 0.3);
   }
 
   &:focus-visible {
-    outline: 2px solid rgba(255, 255, 255, 0.8);
+    outline: 2px solid rgba(129, 140, 248, 0.8);
     outline-offset: 2px;
   }
 
   &.active {
-    background: rgba(102, 126, 234, 0.3);
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.4), rgba(79, 70, 229, 0.4));
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
   }
 `;
 
@@ -469,6 +528,7 @@ const AuthButton = styled(Link)`
 
 const Header: React.FC = () => {
   const { user, isAuthenticated, logout } = useAuth();
+  const { scrollToTop } = useLenis();
   const navigate = useNavigate();
   const location = useLocation();
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -541,10 +601,22 @@ const Header: React.FC = () => {
     setMobileMenuOpen(false);
   };
 
+  const handleLogoClick = (e: React.MouseEvent) => {
+    if (location.pathname === '/') {
+      e.preventDefault();
+      scrollToTop({ duration: 1.5 });
+    }
+  };
+
+  const handleNavClick = () => {
+    // Smooth scroll to top when navigating to new pages
+    scrollToTop({ duration: 0.8 });
+  };
+
   return (
     <HeaderContainer>
       <Nav>
-        <Logo to="/">
+        <Logo to="/" onClick={handleLogoClick}>
           <FaFileAlt className="logo-icon" />
           ResumeBuilder
         </Logo>
@@ -553,6 +625,7 @@ const Header: React.FC = () => {
           <NavLink
             to="/templates"
             className={isActiveLink('/templates') ? 'active' : ''}
+            onClick={handleNavClick}
           >
             <FaClipboard className="nav-icon" />
             Templates
@@ -560,6 +633,7 @@ const Header: React.FC = () => {
           <NavLink
             to="/resume-guide"
             className={isActiveLink('/resume-guide') ? 'active' : ''}
+            onClick={handleNavClick}
           >
             <FaLightbulb className="nav-icon" />
             Guide
@@ -569,6 +643,7 @@ const Header: React.FC = () => {
               <NavLink
                 to="/dashboard"
                 className={isActiveLink('/dashboard') ? 'active' : ''}
+                onClick={handleNavClick}
               >
                 <FaTachometerAlt className="nav-icon" />
                 Dashboard
@@ -576,6 +651,7 @@ const Header: React.FC = () => {
               <NavLink
                 to="/builder"
                 className={isActiveLink('/builder') ? 'active' : ''}
+                onClick={handleNavClick}
               >
                 <FaFileAlt className="nav-icon" />
                 Builder
@@ -688,7 +764,13 @@ const Header: React.FC = () => {
                 to="/builder"
                 className={isActiveLink('/builder') ? 'active' : ''}
                 onClick={closeMobileMenu}
-                style={{ background: 'linear-gradient(135deg, #28a745, #20c997)', color: 'white', fontWeight: '600' }}
+                style={{
+                  background: 'linear-gradient(135deg, #818cf8 0%, #6366f1 100%)',
+                  color: '#ffffff',
+                  fontWeight: '700',
+                  boxShadow: '0 4px 15px rgba(99, 102, 241, 0.3)',
+                  border: '1px solid rgba(255, 255, 255, 0.3)'
+                }}
               >
                 <FaPlus /> Create Resume
               </MobileNavLink>
@@ -712,7 +794,12 @@ const Header: React.FC = () => {
               >
                 <FaQuestionCircle /> Help
               </MobileNavLink>
-              <MobileNavLink as="button" onClick={handleLogout} style={{ border: 'none', background: 'rgba(255, 255, 255, 0.1)', cursor: 'pointer' }}>
+              <MobileNavLink as="button" onClick={handleLogout} style={{
+                border: '1px solid rgba(220, 38, 38, 0.5)',
+                background: 'linear-gradient(135deg, rgba(220, 38, 38, 0.2), rgba(239, 68, 68, 0.2))',
+                cursor: 'pointer',
+                color: '#ffffff'
+              }}>
                 <FaSignOutAlt /> Sign Out
               </MobileNavLink>
             </>
