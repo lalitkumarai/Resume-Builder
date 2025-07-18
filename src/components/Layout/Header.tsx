@@ -19,6 +19,7 @@ import {
 
 import { useAuth } from '../../context/AuthContext';
 import { useLenis } from '../../hooks/useLenis';
+import Logo from '../Logo/Logo';
 
 const HeaderContainer = styled.header`
   background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
@@ -52,37 +53,48 @@ const Nav = styled.nav`
   }
 `;
 
-const Logo = styled(Link)`
-  font-size: 1.5rem;
-  font-weight: 800;
+const LogoLink = styled(Link)`
+  font-size: 1.6rem;
+  font-weight: 900;
   color: #ffffff;
   text-decoration: none;
   display: flex;
   align-items: center;
   gap: 0.75rem;
   transition: all 0.3s ease;
-  padding: 0.5rem;
-  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  border-radius: 15px;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 
-  &:hover {
-    transform: translateY(-2px) scale(1.05);
-    background: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 4px 20px rgba(129, 140, 248, 0.3);
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
   }
 
-  .logo-icon {
-    font-size: 1.8rem;
-    color: #ffffff;
-    filter: drop-shadow(0 2px 4px rgba(99, 102, 241, 0.5));
+  &:hover {
+    transform: translateY(-3px) scale(1.05);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+    box-shadow: 0 8px 30px rgba(129, 140, 248, 0.4);
+    border-color: rgba(255, 255, 255, 0.3);
+
+    &::before {
+      left: 100%;
+    }
   }
 
   @media (max-width: 768px) {
-    font-size: 1.3rem;
-
-    .logo-icon {
-      font-size: 1.5rem;
-    }
+    font-size: 1.4rem;
+    padding: 0.5rem 0.75rem;
   }
 `;
 
@@ -616,10 +628,9 @@ const Header: React.FC = () => {
   return (
     <HeaderContainer>
       <Nav>
-        <Logo to="/" onClick={handleLogoClick}>
-          <FaFileAlt className="logo-icon" />
-          ResumeBuilder
-        </Logo>
+        <LogoLink to="/" onClick={handleLogoClick}>
+          <Logo size="medium" showText={true} />
+        </LogoLink>
 
         <NavLinks>
           <NavLink
